@@ -2,7 +2,7 @@
   "watch": ["Dist"],
   "ext": "js",
   "ignore": ["node_modules"],
-  "exec": "node Dist/app.js"
+  "exec": "node Dist/App.js"
 }
 
   
