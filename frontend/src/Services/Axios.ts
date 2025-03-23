@@ -1,8 +1,9 @@
 import axios, { AxiosInstance, AxiosError } from 'axios';
 
 export const aadharApi: AxiosInstance = axios.create({
-  baseURL: "http://localhost:5000/adhaar",
-
+  baseURL: 
+  // "http://localhost:5000/adhaar",
+  "https://adharvision.shop/adhaar",
   withCredentials: true
 });
 
