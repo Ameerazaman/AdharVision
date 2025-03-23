@@ -1,9 +1,7 @@
 import Tesseract from "tesseract.js";
 import { IAdhaarService } from "./IAdharService";
 import { AddressData } from "../Interface.ts/AddressInterface";
-import sharp from "sharp";
-import path from "path";
-import fs from 'fs'
+
 // import stringSimilarity from "string-similarity"
 export class AdhaarServices implements IAdhaarService {
 
@@ -45,11 +43,7 @@ export class AdhaarServices implements IAdhaarService {
 
         return nameParts.length >= 2 ? nameParts.join(" ") : null;
     }
-    // public getName(text: string): string | null {
-    //     const nameRegex = /(?:\bA\s|=\s?A\s|Name[:\s-]*)([A-Z][a-z]+\s[A-Z][a-z]+)/m;
-    //     const match = text.match(nameRegex);
-    //     return match ? match[1].trim() : null;
-    // }
+ 
 
 
     public getDOB(text: string): string | null {
@@ -80,7 +74,7 @@ export class AdhaarServices implements IAdhaarService {
         const addressPattern = /Address\s+([\w\s,]+?)\s+\d{6}/; 
         const match = cleanedText.match(addressPattern);
 
-        console.log("Extracted Address:", match ? match[0] : "Not Found");
+        
         if (match) {
             const part1 = match[1]
                 .replace(/[^a-zA-Z0-9\s,.'-]/g, "")

@@ -50,11 +50,6 @@ class AdhaarServices {
         );
         return nameParts.length >= 2 ? nameParts.join(" ") : null;
     }
-    // public getName(text: string): string | null {
-    //     const nameRegex = /(?:\bA\s|=\s?A\s|Name[:\s-]*)([A-Z][a-z]+\s[A-Z][a-z]+)/m;
-    //     const match = text.match(nameRegex);
-    //     return match ? match[1].trim() : null;
-    // }
     getDOB(text) {
         // Improved regex to capture DOB in different formats
         const dobRegex = /(\d{2})\s*(\/|-)?\s*(\d{2})\s*(\/|-)?\s*(\d{4})/;
@@ -75,7 +70,6 @@ class AdhaarServices {
         const cleanedText = text.replace(/[^a-zA-Z0-9\s,]/g, "").replace(/\s+/g, " ").trim();
         const addressPattern = /Address\s+([\w\s,]+?)\s+\d{6}/;
         const match = cleanedText.match(addressPattern);
-        console.log("Extracted Address:", match ? match[0] : "Not Found");
         if (match) {
             const part1 = match[1]
                 .replace(/[^a-zA-Z0-9\s,.'-]/g, "")

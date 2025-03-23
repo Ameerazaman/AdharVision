@@ -20,7 +20,6 @@ class AdharController {
         return __awaiter(this, void 0, void 0, function* () {
             var _a, _b;
             try {
-                console.log(req.files);
                 const files = req.files;
                 if (!files || !files['frontImage'] || !files['backImage']) {
                     res.status(400).json({ error: 'Images are required' });
@@ -32,13 +31,9 @@ class AdharController {
                     res.status(http_status_codes_1.StatusCodes.BAD_REQUEST).json({ message: "Both Aadhaar front and back images are required!" });
                     return;
                 }
-                console.log("Aadhaar Parsing Started...");
                 const frontpageText = yield this.adharServices.getDataFromAadhar(frontImage);
                 const backpageText = yield this.adharServices.getDataFromAadhar(backImage);
-                console.log(frontpageText, "frontpageText");
-                console.log(backpageText, "backpageText");
                 const aadharNumber = yield this.adharServices.getAadharNumber(frontpageText);
-                console.log(aadharNumber, "aadharNumber");
                 if (!aadharNumber) {
                     res.status(400).json({ status: false, message: "Invalid Aadhar card data!" });
                     return;
@@ -49,15 +44,12 @@ class AdharController {
                     this.adharServices.getDOB(frontpageText),
                     this.adharServices.getAddress(backpageText),
                 ]);
-                console.log(name, "name", gender, "gender", dob, "dob", addressData, "addressData");
                 if (typeof addressData === "string") {
                     res.status(400).json({ status: false, message: addressData });
                     return;
                 }
                 const address = addressData === null || addressData === void 0 ? void 0 : addressData.address;
                 const pincode = addressData === null || addressData === void 0 ? void 0 : addressData.pincode;
-                // const { address, pincode }: AddressData = addressData;
-                console.log("Hiiiiiiiiiiiiiiiii", addressData);
                 res.status(200).json({
                     status: true,
                     data: {

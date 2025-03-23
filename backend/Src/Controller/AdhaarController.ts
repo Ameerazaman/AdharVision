@@ -11,7 +11,7 @@ export class AdharController {
 
   async parseAdhaar(req: Request, res: Response): Promise<void> {
     try {
-      console.log(req.files)
+     
       const files = req.files as { [fieldname: string]: Express.Multer.File[] };
 
       if (!files || !files['frontImage'] || !files['backImage']) {
@@ -26,16 +26,11 @@ export class AdharController {
         return;
       }
 
-      console.log("Aadhaar Parsing Started...");
-
       const frontpageText = await this.adharServices.getDataFromAadhar(frontImage);
       const backpageText = await this.adharServices.getDataFromAadhar(backImage);
 
-      
-      console.log(frontpageText, "frontpageText")
-      console.log(backpageText, "backpageText")
       const aadharNumber: string | null = await this.adharServices.getAadharNumber(frontpageText);
-      console.log(aadharNumber, "aadharNumber")
+
       if (!aadharNumber) {
         res.status(400).json({ status: false, message: "Invalid Aadhar card data!" });
         return;
@@ -48,7 +43,6 @@ export class AdharController {
         this.adharServices.getDOB(frontpageText),
         this.adharServices.getAddress(backpageText),
       ]);
-      console.log(name, "name", gender, "gender", dob, "dob", addressData, "addressData")
 
       if (typeof addressData === "string") {
         res.status(400).json({ status: false, message: addressData });
@@ -57,8 +51,7 @@ export class AdharController {
 
       const address=addressData?.address
       const pincode=addressData?.pincode
-      // const { address, pincode }: AddressData = addressData;
-      console.log("Hiiiiiiiiiiiiiiiii", addressData)
+
       res.status(200).json({
         status: true,
         data: {
