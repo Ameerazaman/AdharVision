@@ -1,7 +1,8 @@
 {
-    "watch": ["src"],
-    "ext": "ts",
-    "ignore": ["node_modules"],
-    "exec": "ts-node src/app.ts"
-  }
+  "watch": ["Dist"],
+  "ext": "js",
+  "ignore": ["node_modules"],
+  "exec": "node Dist/app.js"
+}
+
   
